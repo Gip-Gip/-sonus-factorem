@@ -65,7 +65,7 @@
                 
                 halfStep:32, // We bind "set halfStep to true" to the space bar
                 
-                bold:16, // We bind "set boldMusic to true" to the shift key
+                qyarterStep:16, // We bind "set quarterStep to true" to the shift key
                 
                 one:48,
                 two:49,
@@ -86,28 +86,24 @@
             var octave = 3;
             var halfStep = false;
             var aud = new AudioContext();
-            var audlist = new Array(40);
+            var audlist = new Array(80);
             var curtype = "triangle";
-            var boldMusic = false;
+            var quarterStep = false;
             
             function playNote(note)
             {
-                note = note * 2;
-                if(halfStep == true) note += 1;
-                if(audlist[note] != null || audlist[note + 1] != null) return false;
+                note = note * 4;
+                if(halfStep == true) note += 2;
+                if(quarterStep == true) note += 1;
+                
+                if(audlist[note] != null || audlist[note + 1] != null || audlist[note + 2] != null || audlist[note + 3] != null) return false;
                 var auda = aud.createOscillator();
                 auda.type = curtype;
-                auda.frequency.value = (10 * Math.pow(2, octave)) + ((0.5 * Math.pow(2, octave-1)) * note);
+                auda.frequency.value = (10 * Math.pow(2, octave)) + ((0.25 * Math.pow(2, octave-1)) * note);
                 console.log(auda.frequency.value);
                 auda.start(0);
                 auda.connect(aud.destination)
                 audlist[note] = auda;
-                if(boldMusic == true)
-                {
-                    var audg = aud.createGain();
-                    audg.gain.value = 2.0;
-                    audg.connect(audlist[note]);
-                }
             }
             
             function stopNote(note)
@@ -122,6 +118,16 @@
                 {
                     audlist[note + 1].stop();
                     audlist[note + 1] = null;
+                }
+                if(audlist[note + 2] != null)
+                {
+                    audlist[note + 2].stop();
+                    audlist[note + 2] = null;
+                }
+                if(audlist[note + 3] != null)
+                {
+                    audlist[note + 3].stop();
+                    audlist[note + 3] = null;
                 }
             }
             
