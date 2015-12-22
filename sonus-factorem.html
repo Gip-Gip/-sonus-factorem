@@ -90,6 +90,7 @@
             var curtype = "triangle";
             var quarterStep = false;
             var statport = document.getElementById("stats");
+            var statportmsg = "";
             
             function playNote(note)
             {
@@ -97,20 +98,20 @@
                 if(audlist[note] != null || audlist[note + 1] != null || audlist[note + 2] != null || audlist[note + 3] != null) return false;
                 note = note / 4;
                 
-                statport.innerHTML += "<p id=\"" + note + "\">NOTE: &#" + (note + 65) + "; "
+                statportmsg += "<p id=\"" + note + "\">NOTE: &#" + (note + 65) + "; "
                 
                 note = note * 4;
                 
                 if(halfStep == true)
                 {
                     note += 2;
-                    statport.innerHTML += "HALFSTEP; ";
+                    statportmsg += "HALFSTEP; ";
                 }
                 
                 if(quarterStep == true)
                 {
                     note += 1;
-                    statport.innerHTML += "QUARTERSTEP; ";
+                    statportmsg += "QUARTERSTEP; ";
                 }
                 
                 var auda = aud.createOscillator();
@@ -121,7 +122,10 @@
                 auda.connect(aud.destination)
                 audlist[note] = auda;
                 
-                statport.innerHTML += "HZ:" + auda.frequency.value + "</p>"
+                statportmsg += "HZ:" + auda.frequency.value + "</p>"
+                statport.innerHTML += statportmsg;
+                
+                statportmsg = "";
             }
             
             function stopNote(note)
