@@ -60,6 +60,7 @@
             var octave = 1;
             var halfStep = false;
             var aud = new AudioContext();
+            var audlist = new Array(40)
             
             function playNote(note)
             {
@@ -69,9 +70,44 @@
                 auda.type = "triangle";
                 auda.frequency.value = (10 * Math.pow(2, octave)) + ((0.5 * Math.pow(2, octave - 1)) * note);
                 console.log(auda.frequency.value);
-                console.log(((Math.pow(2, octave) / 40) * note));
                 auda.start(0);
                 auda.connect(aud.destination)
+                audlist[note] = auda;
+            }
+            
+            function stopNote(note)
+            {
+                note = note * 2;
+                if(halfStep == true) note += 1;
+                audlist[note].stop();
+            }
+            
+            window.onkeyup = function(e)
+            {
+                if (!e) e = window.event;
+                
+                if(e.keyCode == key.a) stopNote(0);
+                if(e.keyCode == key.b) stopNote(1);
+                if(e.keyCode == key.c) stopNote(2);
+                if(e.keyCode == key.d) stopNote(3);
+                if(e.keyCode == key.e) stopNote(4);
+                if(e.keyCode == key.f) stopNote(5);
+                if(e.keyCode == key.g) stopNote(6);
+                if(e.keyCode == key.h) stopNote(7);
+                if(e.keyCode == key.i) stopNote(8);
+                if(e.keyCode == key.j) stopNote(9);
+                if(e.keyCode == key.k) stopNote(10);
+                if(e.keyCode == key.l) stopNote(11);
+                if(e.keyCode == key.m) stopNote(12);
+                if(e.keyCode == key.n) stopNote(13);
+                if(e.keyCode == key.o) stopNote(14);
+                if(e.keyCode == key.p) stopNote(15);
+                if(e.keyCode == key.q) stopNote(16);
+                if(e.keyCode == key.r) stopNote(17);
+                if(e.keyCode == key.s) stopNote(18);
+                if(e.keyCode == key.t) stopNote(19);
+                
+                if (e.keyCode == key.shift) halfStep = false;
             }
             
             window.onkeydown = function(e)
