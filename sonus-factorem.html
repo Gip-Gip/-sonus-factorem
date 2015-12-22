@@ -67,7 +67,7 @@
                 if(halfStep == true) note += 1;
                 var auda = aud.createOscillator();
                 auda.type = "triangle";
-                auda.frequency.value = (10 * Math.pow(2, octave)) + ((0.5 * Math.pow(2, octave)) * note);
+                auda.frequency.value = (10 * Math.pow(2, octave)) + ((0.5 * Math.pow(2, octave - 1)) * note);
                 console.log(auda.frequency.value);
                 console.log(((Math.pow(2, octave) / 40) * note));
                 auda.start(0);
@@ -91,6 +91,24 @@
                 
                 if(e.keyCode == key.a) playNote(0);
                 if(e.keyCode == key.b) playNote(1);
+                if(e.keyCode == key.b) playNote(2);
+                if(e.keyCode == key.b) playNote(3);
+                if(e.keyCode == key.b) playNote(4);
+                if(e.keyCode == key.b) playNote(5);
+                if(e.keyCode == key.b) playNote(6);
+                if(e.keyCode == key.b) playNote(7);
+                if(e.keyCode == key.b) playNote(8);
+                if(e.keyCode == key.b) playNote(9);
+                if(e.keyCode == key.b) playNote(10);
+                if(e.keyCode == key.b) playNote(11);
+                if(e.keyCode == key.b) playNote(12);
+                if(e.keyCode == key.b) playNote(13);
+                if(e.keyCode == key.b) playNote(14);
+                if(e.keyCode == key.b) playNote(15);
+                if(e.keyCode == key.b) playNote(16);
+                if(e.keyCode == key.b) playNote(17);
+                if(e.keyCode == key.b) playNote(18);
+                if(e.keyCode == key.b) playNote(19);
             }
         </script>
     </body>
