@@ -79,13 +79,16 @@
             function stopNote(note)
             {
                 note = note * 2;
-                if(audlist[note] != null) audlist[note].stop();
-                else if(audlist[note + 1] != null)
+                if(audlist[note] != null)
+                {
+                    audlist[note].stop();
+                    audlist[note] = null;
+                }
+                if(audlist[note + 1] != null)
                 {
                     audlist[note + 1].stop();
                     audlist[note + 1] = null;
                 }
-                audlist[note] = null;
             }
             
             window.onkeyup = function(e)
