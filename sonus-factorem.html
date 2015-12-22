@@ -33,8 +33,23 @@
             Welcome to sonus factorem, a place where you can play music using just your keyboard!
         </p>
         <p>
-            It uses a custom 20 note scale (with half-steps), the first octive being 20hz through 40hz,
+            It uses a custom 20 note scale (with half-steps and quarter steps), the first octive being 20hz through 40hz,
             the second 40hz through 80hz, the third being 80hz through 160 hz and so on.
+        </p>
+        <p>
+            To play, keep these controls in mind:
+            
+            <ul>
+                <li>Letters A-T = The twenty notes</li>
+                <li>Numbers 1-9 = The octive being played on</li>
+                <li>Space = Halfstep</li>
+                <li>Shift = Quarterstep</li>
+                <li>Space + Shift = ThreeQuarterStep</li>
+                <li>Up Arrow = Triangle Wave</li>
+                <li>Down Arrow = Sine Wave</li>
+                <li>Left Arrow = Square Wave</li>
+                <li>Right Arrow = Saw Wave</li>
+            </ul>
         </p>
         <h2>Your Stats:</h2>
         <p id="stats">
@@ -98,7 +113,7 @@
                 if(audlist[note] != null || audlist[note + 1] != null || audlist[note + 2] != null || audlist[note + 3] != null) return false;
                 note = note / 4;
                 
-                statportmsg += "<p id=\"" + note + "\">NOTE: &#" + (note + 65) + "; "
+                statportmsg += "<p id=\"" + note + "\">NOTE: &#" + (note + 65) + "; OCTAVE:" + octave + "; ";
                 
                 note = note * 4;
                 
