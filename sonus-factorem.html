@@ -89,25 +89,44 @@
             var audlist = new Array(80);
             var curtype = "triangle";
             var quarterStep = false;
+            var statport = document.getElementById("stats");
             
             function playNote(note)
             {
                 note = note * 4;
-                if(halfStep == true) note += 2;
-                if(quarterStep == true) note += 1;
-                
                 if(audlist[note] != null || audlist[note + 1] != null || audlist[note + 2] != null || audlist[note + 3] != null) return false;
+                note = note / 4;
+                
+                statport.innerHTML += "<p id=\"" + note + "\">NOTE: &#" + (note + 65) + "; "
+                
+                note = note * 4;
+                
+                if(halfStep == true)
+                {
+                    note += 2;
+                    statport.innerHTML += "HALFSTEP; ";
+                }
+                
+                if(quarterStep == true)
+                {
+                    note += 1;
+                    statport.innerHTML += "QUARTERSTEP; ";
+                }
+                
                 var auda = aud.createOscillator();
                 auda.type = curtype;
                 auda.frequency.value = (10 * Math.pow(2, octave)) + ((0.25 * Math.pow(2, octave-1)) * note);
-                console.log(auda.frequency.value);
+                
                 auda.start(0);
                 auda.connect(aud.destination)
                 audlist[note] = auda;
+                
+                statport.innerHTML += "HZ:" + auda.frequency.value + "</p>"
             }
             
             function stopNote(note)
             {
+                statport.removeChild(document.getElementById(note));
                 note = note * 4;
                 if(audlist[note] != null)
                 {
