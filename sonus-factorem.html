@@ -66,6 +66,7 @@
             {
                 note = note * 2;
                 if(halfStep == true) note += 1;
+                if(audlist[note] != null) return false;
                 var auda = aud.createOscillator();
                 auda.type = "triangle";
                 auda.frequency.value = (10 * Math.pow(2, octave)) + ((0.5 * Math.pow(2, octave - 1)) * note);
@@ -80,6 +81,7 @@
                 note = note * 2;
                 if(halfStep == true) note += 1;
                 audlist[note].stop();
+                audlist[note] = null;
             }
             
             window.onkeyup = function(e)
