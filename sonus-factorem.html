@@ -67,8 +67,9 @@
                 if(halfStep == true) note += 1;
                 var auda = aud.createOscillator();
                 auda.type = "triangle";
-                auda.frequency.value = 10 * Math.pow(2, octave) + ((Math.pow(2, octave) / 40) * note);
+                auda.frequency.value = (10 * Math.pow(2, octave)) + ((Math.pow(2, octave) / 40) * note);
                 console.log(auda.frequency.value);
+                console.log(((Math.pow(2, octave) / 40) * note));
                 auda.start(0);
                 auda.connect(aud.destination)
             }
