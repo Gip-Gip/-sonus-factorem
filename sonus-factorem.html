@@ -7,9 +7,19 @@
     </head>
     <body>
         <style>
-            body: {
-                background-color:black;
-                color:white;
+            body {
+                background-color:#000000;
+                color:#FFFFFF;
+                font-family:monospace;
+            }
+            
+            h1 {
+                font-size:5vw;
+                text-align:center;
+            }
+            
+            h2 {
+                font-size:3vw;
                 text-align:center;
             }
         </style>
@@ -62,12 +72,18 @@
                 seven:54,
                 eight:55,
                 nine:56,
+                
+                triangle:38, // We bind the "set wave type to triangle" to the up arrow
+                sine:40, // We bind the "set wave type to sine" to the down arrow
+                square:37 // We bind the "set wave type to square" to the left arrow
+                saw:39 // We bind the "set wave type to saw" to the right arrow
             }
             
             var octave = 3;
             var halfStep = false;
             var aud = new AudioContext();
-            var audlist = new Array(40)
+            var audlist = new Array(40);
+            var curtype = "triangle";
             
             function playNote(note)
             {
@@ -75,7 +91,7 @@
                 if(halfStep == true) note += 1;
                 if(audlist[note] != null || audlist[note + 1] != null) return false;
                 var auda = aud.createOscillator();
-                auda.type = "triangle";
+                auda.type = curtype;
                 auda.frequency.value = (10 * Math.pow(2, octave)) + ((0.5 * Math.pow(2, octave-1)) * note);
                 console.log(auda.frequency.value);
                 auda.start(0);
@@ -129,6 +145,7 @@
             window.onkeydown = function(e)
             {
                 if (!e) e = window.event;
+                
                 if (e.keyCode == key.one) octave = 1;
                 if (e.keyCode == key.two) octave = 2;
                 if (e.keyCode == key.three) octave = 3;
@@ -138,6 +155,11 @@
                 if (e.keyCode == key.seven) octave = 7;
                 if (e.keyCode == key.eight) octave = 8;
                 if (e.keyCode == key.nine) octave = 9;
+                
+                if(e.keyCode == key.triangle) curtype = "triangle";
+                if(e.keyCode == key.sine) curtype = "sine";
+                if(e.keyCode == key.square) curtype = "square";
+                if(e.keyCode == key.saw) curtype = "sawtooth";
                 
                 if (e.keyCode == key.shift) halfStep = true;
                 
