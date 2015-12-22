@@ -129,7 +129,9 @@
             {
                 if (!e) e = window.event;
                 
-                if (e.keyCode == key.shift) halfStep = false;
+                if (e.keyCode == key.halfStep) halfStep = false;
+                
+                if (e.keyCode == key.bold) boldMusic = false;
                 
                 if(e.keyCode == key.a) stopNote(0);
                 if(e.keyCode == key.b) stopNote(1);
@@ -172,7 +174,8 @@
                 if(e.keyCode == key.square) curtype = "square";
                 if(e.keyCode == key.saw) curtype = "sawtooth";
                 
-                if (e.keyCode == key.shift) halfStep = true;
+                if (e.keyCode == key.halfStep) halfStep = true;
+                if (e.keyCode == key.bold) boldMusic = true;
                 
                 if(e.keyCode == key.a) playNote(0);
                 if(e.keyCode == key.b) playNote(1);
