@@ -62,7 +62,11 @@
                 r:82,
                 s:83,
                 t:84,
-                shift:16,
+                
+                halfStep:32, // We bind "set halfStep to true" to the space bar
+                
+                bold:16, // We bind "set boldMusic to true" to the shift key
+                
                 one:48,
                 two:49,
                 three:50,
@@ -73,10 +77,10 @@
                 eight:55,
                 nine:56,
                 
-                triangle:38, // We bind the "set wave type to triangle" to the up arrow
-                sine:40, // We bind the "set wave type to sine" to the down arrow
-                square:37, // We bind the "set wave type to square" to the left arrow
-                saw:39 // We bind the "set wave type to saw" to the right arrow
+                triangle:38, // We bind "set wave type to triangle" to the up arrow
+                sine:40, // We bind "set wave type to sine" to the down arrow
+                square:37, // We bind "set wave type to square" to the left arrow
+                saw:39 // We bind "set wave type to saw" to the right arrow
             }
             
             var octave = 3;
@@ -84,6 +88,7 @@
             var aud = new AudioContext();
             var audlist = new Array(40);
             var curtype = "triangle";
+            var boldMusic = false;
             
             function playNote(note)
             {
@@ -97,6 +102,12 @@
                 auda.start(0);
                 auda.connect(aud.destination)
                 audlist[note] = auda;
+                if(boldMusic == true)
+                {
+                    var audg = aud.createGain();
+                    audg.gain.value = 2.0;
+                    audg.connect(audlist[note]);
+                }
             }
             
             function stopNote(note)
