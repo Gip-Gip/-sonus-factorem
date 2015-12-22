@@ -79,14 +79,20 @@
             function stopNote(note)
             {
                 note = note * 2;
-                if(halfStep == true) note += 1;
-                audlist[note].stop();
+                if(audlist[note] != null) audlist[note].stop();
+                else if(audlist[note + 1] != null)
+                {
+                    audlist[note + 1].stop();
+                    audlist[note + 1] = null;
+                }
                 audlist[note] = null;
             }
             
             window.onkeyup = function(e)
             {
                 if (!e) e = window.event;
+                
+                if (e.keyCode == key.shift) halfStep = false;
                 
                 if(e.keyCode == key.a) stopNote(0);
                 if(e.keyCode == key.b) stopNote(1);
@@ -108,8 +114,6 @@
                 if(e.keyCode == key.r) stopNote(17);
                 if(e.keyCode == key.s) stopNote(18);
                 if(e.keyCode == key.t) stopNote(19);
-                
-                if (e.keyCode == key.shift) halfStep = false;
             }
             
             window.onkeydown = function(e)
