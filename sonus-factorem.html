@@ -17,7 +17,7 @@
         </p>
         <p>
             It uses a custom 20 note scale (with half-steps), the first octive being 20hz though 40hz,
-            the second 40hz though 80hz, the third being 8hz though 160 hz and so on.
+            the second 40hz though 80hz, the third being 80hz though 160 hz and so on.
         </p>
         <h2>Your Stats:</h2>
         <p id="stats">
@@ -69,7 +69,7 @@
                 if(audlist[note] != null || audlist[note + 1] != null) return false;
                 var auda = aud.createOscillator();
                 auda.type = "triangle";
-                auda.frequency.value = (10 * Math.pow(20, octave)) + ((0.5 * Math.pow(2, octave-1)) * note);
+                auda.frequency.value = (10 * Math.pow(2, octave)) + ((0.5 * Math.pow(2, octave-1)) * note);
                 console.log(auda.frequency.value);
                 auda.start(0);
                 auda.connect(aud.destination)
