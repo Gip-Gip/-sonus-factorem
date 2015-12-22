@@ -69,7 +69,7 @@
                 if(audlist[note] != null || audlist[note + 1] != null) return false;
                 var auda = aud.createOscillator();
                 auda.type = "triangle";
-                auda.frequency.value = (2 * Math.pow(2, octave)) + ((0.1 * Math.pow(2, octave - 1)) * note);
+                auda.frequency.value = (2 * Math.pow(1.5, octave + 2)) + ((0.0125 * Math.pow(1.5, octave + 1)) * note);
                 console.log(auda.frequency.value);
                 auda.start(0);
                 auda.connect(aud.destination)
