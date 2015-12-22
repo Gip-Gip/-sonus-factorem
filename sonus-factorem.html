@@ -69,7 +69,7 @@
                 if(audlist[note] != null || audlist[note + 1] != null) return false;
                 var auda = aud.createOscillator();
                 auda.type = "triangle";
-                auda.frequency.value = (2 * Math.pow(1.5, octave)) + ((0.0125 * Math.pow(1.5, octave-1)) * note);
+                auda.frequency.value = (10 * Math.pow(20, octave)) + ((0.5 * Math.pow(2, octave-1)) * note);
                 console.log(auda.frequency.value);
                 auda.start(0);
                 auda.connect(aud.destination)
@@ -122,15 +122,15 @@
             window.onkeydown = function(e)
             {
                 if (!e) e = window.event;
-                if (e.keyCode == key.one) octave = 3;
-                if (e.keyCode == key.two) octave = 4;
-                if (e.keyCode == key.three) octave = 5;
-                if (e.keyCode == key.four) octave = 6;
-                if (e.keyCode == key.five) octave = 7;
-                if (e.keyCode == key.six) octave = 8;
-                if (e.keyCode == key.seven) octave = 9;
-                if (e.keyCode == key.eight) octave = 10;
-                if (e.keyCode == key.nine) octave = 11;
+                if (e.keyCode == key.one) octave = 1;
+                if (e.keyCode == key.two) octave = 2;
+                if (e.keyCode == key.three) octave = 3;
+                if (e.keyCode == key.four) octave = 4;
+                if (e.keyCode == key.five) octave = 5;
+                if (e.keyCode == key.six) octave = 6;
+                if (e.keyCode == key.seven) octave = 7;
+                if (e.keyCode == key.eight) octave = 8;
+                if (e.keyCode == key.nine) octave = 9;
                 
                 if (e.keyCode == key.shift) halfStep = true;
                 
