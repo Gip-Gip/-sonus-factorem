@@ -16,7 +16,7 @@
             Welcome to sonus factorem, a place where you can play music using just your keyboard!
         </p>
         <p>
-            It uses a custom 40 note scale, the first octive being 20hz though 40hz,
+            It uses a custom 20 note scale (with half-steps), the first octive being 20hz though 40hz,
             the second 40hz though 80hz, the third being 8hz though 160 hz and so on.
         </p>
         <h2>Your Stats:</h2>
@@ -45,16 +45,7 @@
                 r:82,
                 s:83,
                 t:84,
-                u:85,
-                v:86,
-                w:87,
-                x:88,
-                y:89,
-                z:90,
-                a1:188,
-                a2:190,
-                a3:189,
-                a1:186,
+                shift:16,
                 one:48,
                 two:49,
                 three:50,
@@ -64,15 +55,43 @@
                 seven:54,
                 eight:55,
                 nine:56,
-                ten:57
             }
             
-            var octnum = 0 // The number of octaves per cycle
+            var octave = 1;
+            var halfStep = false;
+            var aud = new AudioContext();
+            
+            var curroc = null;
+            
+            function playNote(note)
+            {
+                note = note * 2;
+                if(halfStep == true) note += 1;
+                var auda = aud.createOscillator();
+                auda.type = "triangle";
+                auda.frequency.value = 10 * Math.pow(2, octave) + ((Math.pow(2, octave) / 40) * note);
+                auda.start(0);
+                auda.connect(aud.destination)
+                curroc = auda;
+            }
             
             window.onkeydown = function(e)
             {
+                curroc.stop();
                 if (!e) e = window.event;
-                if (e.keyCode == key.a) console.log("a");
+                if (e.keyCode == key.one) octave = 1;
+                if (e.keyCode == key.two) octave = 2;
+                if (e.keyCode == key.three) octave = 3;
+                if (e.keyCode == key.four) octave = 4;
+                if (e.keyCode == key.five) octave = 5;
+                if (e.keyCode == key.six) octave = 6;
+                if (e.keyCode == key.seven) octave = 7;
+                if (e.keyCode == key.eight) octave = 8;
+                if (e.keyCode == key.nine) octave = 9;
+                
+                if (e.keyCode == key.shift) halfStep = true;
+                
+                if(e.keyCode == key.a) playNote(0);
             }
         </script>
     </body>
