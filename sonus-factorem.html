@@ -65,7 +65,7 @@
                 
                 halfStep:32, // We bind "set halfStep to true" to the space bar
                 
-                qyarterStep:16, // We bind "set quarterStep to true" to the shift key
+                quarterStep:16, // We bind "set quarterStep to true" to the shift key
                 
                 one:48,
                 two:49,
@@ -108,7 +108,7 @@
             
             function stopNote(note)
             {
-                note = note * 2;
+                note = note * 4;
                 if(audlist[note] != null)
                 {
                     audlist[note].stop();
@@ -136,8 +136,7 @@
                 if (!e) e = window.event;
                 
                 if (e.keyCode == key.halfStep) halfStep = false;
-                
-                if (e.keyCode == key.bold) boldMusic = false;
+                if (e.keyCode == key.quarterStep) quarterStep = false;
                 
                 if(e.keyCode == key.a) stopNote(0);
                 if(e.keyCode == key.b) stopNote(1);
@@ -181,7 +180,7 @@
                 if(e.keyCode == key.saw) curtype = "sawtooth";
                 
                 if (e.keyCode == key.halfStep) halfStep = true;
-                if (e.keyCode == key.bold) boldMusic = true;
+                if (e.keyCode == key.quarterStep) quarterStep = true;
                 
                 if(e.keyCode == key.a) playNote(0);
                 if(e.keyCode == key.b) playNote(1);
